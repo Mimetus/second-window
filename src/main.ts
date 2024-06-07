@@ -464,7 +464,7 @@ export default class ImageWindow extends Plugin {
             if (target.localName !== "img") return;
 
             const menu = new Menu();
-            this.addMenuItems(menu, target);
+            this.addMenuItems(menu, target as HTMLImageElement);
 
             menu.showAtPosition({ x: event.pageX, y: event.pageY });
         });
