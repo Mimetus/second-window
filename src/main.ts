@@ -167,7 +167,7 @@ class NamedWindow extends Component {
         if (target instanceof TFile)
             await this.leaf.openFile(target, { state: { mode: "preview" } });
         else if (target instanceof HTMLImageElement)
-            await this.leaf.view.contentEl.setChildrenInPlace([target.cloneNode(true)]);
+            this.leaf.view.contentEl.setChildrenInPlace([target.cloneNode(true)]);
 
         this.window.rootEl.querySelector(".status-bar")?.detach();
 
@@ -385,10 +385,7 @@ export default class ImageWindow extends Plugin {
             item.setTitle("Open in second window")
                 .setIcon("open-elsewhere-glyph")
                 .onClick(async () => {
-                    if (target instanceof TFile)
-                        this.defaultWindow.loadFile(target);
-                    else if (target instanceof HTMLImageElement)
-                        this.defaultWindow.loadFile(target);
+                    this.defaultWindow.loadFile(target);
                 });
         });
         for (const [name, record] of Object.entries(
@@ -401,10 +398,7 @@ export default class ImageWindow extends Plugin {
                     .onClick(async () => {
                         const namedWindow = this.windows.get(record.id);
                         if (namedWindow !== undefined) {
-                            if (target instanceof TFile)
-                                namedWindow.loadFile(target);
-                            else if (target instanceof HTMLImageElement)
-                                namedWindow.loadFile(target);
+                            namedWindow.loadFile(target);
                         }
                     });
             });
