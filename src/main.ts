@@ -12,7 +12,6 @@ import {
     Setting,
     TextComponent,
     TFile,
-    View,
     WorkspaceLeaf,
     WorkspaceWindow
 } from "obsidian";
