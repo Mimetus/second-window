@@ -187,7 +187,7 @@ class NamedWindow extends Component {
             this.window.win.electronWindow.setTitle(target.name);
         }
     }
-    
+
     /**
      * Save window position and size under a key specific to the host.  This way,
      * sharing the vault with a second computer with a different monitor layout will not overwrite the
@@ -381,8 +381,7 @@ export default class ImageWindow extends Plugin {
         return document.head.innerHTML;
     }
 
-    addMenuItems(menu: Menu, target:TFile | HTMLImageElement) : void
-    {
+    addMenuItems(menu: Menu, target: TFile | HTMLImageElement): void {
         menu.addItem((item) => {
             item.setTitle("Open in second window")
                 .setIcon("open-elsewhere-glyph")
@@ -424,24 +423,24 @@ export default class ImageWindow extends Plugin {
         this.addSettingTab(new ImageWindowSettingTab(this, this));
 
         // Track right clicks for editor context menu
-        let rightClickTarget:EventTarget = null;
+        let rightClickTarget: EventTarget = null;
         let rightClickOnSameTarget = false;
 
         this.registerDomEvent(document, "mousedown", (event: MouseEvent) => {
             // Check if it's the right button being pushed down
-            if(event.button !== 2) return;
+            if (event.button !== 2) return;
             rightClickTarget = event.target;
         });
-        
+
         this.registerDomEvent(document, "mouseup", (event: MouseEvent) => {
             // Check if it's the right button being lifted
-            if(event.button !== 2 || event.target != rightClickTarget) return;
+            if (event.button !== 2 || event.target != rightClickTarget) return;
             rightClickOnSameTarget = true;
         });
 
         this.registerEvent(
             this.app.workspace.on("file-menu", (menu, file) => {
-                
+
                 if (!(this.app.vault.adapter instanceof FileSystemAdapter))
                     return;
                 if (!(file instanceof TFile)) return;
